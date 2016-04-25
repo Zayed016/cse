@@ -12,23 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
 Route::get('home', function () {
     return view('home');
 });
-// Route::get('menu', function () {
-//     return view('menu');
-// });
+
 Route::get('reservation', function () {
     return view('reservation');
 });
 Route::get('menu', 'Mycontroller@formenu');
 
-//Route::get('buy', 'Mycontroller@forsale');
-
 Route::post('buying', 'Mycontroller@sale');
 
-//Route::post('login',  'MyController@method');
+//Route::post('trans', 'MyController@transaction');
+
+//Route::get('tran', 'MyController@transaction');
+
+Route::post('final', 'MyController@atlast');

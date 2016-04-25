@@ -1,11 +1,18 @@
-<?php
+<html>
+<head>
+<script>
+window.onload=function(){
+  document.getElementById("button").style.display='none';
 
-$n = $_POST['hidName'];
-$t = $_POST['hidType'];
-$p = $_POST['hidPrice'];
-
-echo "Name: " . $n . "<br>";
-echo "Type: " . $t . "<br>";
-echo "Price: " . $p . "<br>";
-
-?>
+}
+function showButton(){
+  document.getElementById("button").style.display='block';
+}
+</script>
+</head>
+<body>
+<input type="button" id="button" value="New Button"/>
+Change the text in Input Box. Then Button will be show<br/><br/>
+<input type="text" id="userText" value="Change the text" onchange="showButton()"/>
+</body>
+</html>

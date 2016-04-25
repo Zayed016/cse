@@ -22,6 +22,7 @@
             orderedProductsTblBody.deleteRow(0);
         }
        var cart_total_price=0;
+
        
         for(var product in foodcart){
                
@@ -39,16 +40,18 @@
             celltype.innerHTML = foodcart[product].type;
             cellPrice.innerHTML = foodcart[product].Price;
             cart_total_price+=foodcart[product].Price;
+            
 
         }
        
         document.getElementById("cart_total").innerHTML="Total Price:   "+cart_total_price;
     }
 
-    function AddtoCart(name,type,price){
+    function AddtoCart(id,name,type,price){
       
        var singleProduct = {};
        
+       singleProduct.Id=id;
        singleProduct.Name=name;
        singleProduct.type=type;
        singleProduct.Price=price;
@@ -57,8 +60,11 @@
        
        displayfoodcart();
     }  
-    function removefromcart(name,type,price){
+    function removefromcart(id,name,type,price){
+
         var pro={};
+
+        pro.Id=id;
         pro.Name=name;
         pro.type=type;
         pro.price=price;
@@ -70,19 +76,23 @@
 
     function passData() {
 
+    var id="";
     var name = "";
     var type = "";
     var price = "";
 
     for(var product in foodcart){
+        id += foodcart[product].Id+",";
         name += foodcart[product].Name + ",";
         type += foodcart[product].type + ",";
         price += foodcart[product].Price + ",";    
     }
+    document.getElementById("hidId").value = id;
     document.getElementById("hidName").value = name;
     document.getElementById("hidType").value = type;
     document.getElementById("hidPrice").value = price;
     }
+
     //Add some products to our shopping cart via code or you can create a button with onclick event
     //AddtoCart("Table","Big red table",50);
     //AddtoCart("Door","Big yellow door",150);
@@ -133,7 +143,8 @@
                         </td>
                         <td>
                         
-                      <input type="button" class="btn btn-primary" value="Add to cart" onclick="AddtoCart('{!!$user->name!!}','{!!$user->type!!}',<?php echo $p;?>)"/>
+                      <input type="button" class="btn btn-primary" value="Add to cart" 
+                      onclick="AddtoCart('{!!$user->f_id!!}','{!!$user->name!!}','{!!$user->type!!}',<?php echo $p;?>)"/>
                          
                         </td>
                     </tr>
@@ -143,7 +154,7 @@
 
             </table>
         </td>
-        <td width="40%" valign="top" >
+        <td width="43%" valign="top" >
 
         <h3>Ordered Food <input style="float: right;" type="button" class="btn btn-danger" value="Remove" onclick="removefromcart()" /></h3>
             <table  class="table table-bordered" class="table table-condensed" id="orderedProductsTbl">
@@ -176,12 +187,22 @@
                 </tfoot>
             </table>
              
-            
+            <input type="hidden" id="hidId" name="hidId" value="">
             <input type="hidden" id="hidName" name="hidName" value="">
             <input type="hidden" id="hidType" name="hidType" value="">
             <input type="hidden" id="hidPrice" name="hidPrice" value="">
             <input type="submit" class="btn btn-success" onclick="passData()" style=" float:right" value="Buy" />
              {!!  Form::close(); !!}
+       
+        @if (count($errors) > 0)
+        <div class="alert alert-danger" style="clear :right">
+        
+        @foreach ($errors->all() as $error)
+                {{ $errors->first('hidId') }}
+            @endforeach
+        
+    </div>
+@endif
         </td>
     </tr>
 </table>
