@@ -208,17 +208,16 @@
 </table>
 
 
+</b>
+</div>
+</div>
+</div>
+</div>
 
   
 </div>
 </div>
 </div>
 
-<div style="padding-top: 30px;">
- <div class="panel-footer">
-      
-      
-        <p style="text-align: center; color:black;" class="muted credit">Zayed@2016</p>
-     
-    </div>
-    </div>
+
+@include('foot');

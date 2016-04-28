@@ -75,3 +75,4 @@ foreach ($plus as $key ) {
  </div>
  </div>
 
+@include('foot')

@@ -16,7 +16,7 @@
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         
         <script type="text/javascript" src="js/npm.js"></script>
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
+       <!--  <script src="http://maps.googleapis.com/maps/api/js"></script> -->
         
     <script>
     var myCenter=new google.maps.LatLng(24.37114,88.640467);
@@ -87,9 +87,8 @@
 
 
 
-<div style="font-size: 20px; font-style: bold"class="container">
+<div style="font-size: 20px; font-style: bold" class="container">
     <div class="row">
-
         <div class="col-sm-6">
                          <div class="panel panel-success">
                             <div class="panel-heading">
@@ -127,12 +126,9 @@
       <td>9:00 AM – 10:00 PM</td>
       </tr>
     </table>
-                            </div>
-                          </div>
-            </div>
-
-
-
+     </div>
+    </div>
+   </div>
         <div class="col-sm-5">
                 <div class="row">
                     <div class="col-sm-12">
@@ -145,36 +141,12 @@
                             </div>
                           </div>
                         </div>  
-                    <div class="col-sm-12">  
-                          <div class="panel panel-success">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">Contact</h3>
-                            </div>
-                            <div class="panel-body">
-                            <ul>
-                              <li>Phone (203) 555 - 7890</li>
-                              <li>Fax (516) 555 - 7021</li>
-                              <li>Email info@restaurantengine.com</li>
-                            </ul>
-                            </div>
-                          </div>    
-                    </div>
+                
                 </div>  
         </div>          
     </div>      
 </div>
 
-  </body>   
- <div style="padding-top: 30px;">
- <div class="panel-footer">
-      
-      
-        <p style="text-align: center; color:black;" class="muted credit">Zayed@2016</p>
-     
-    </div>
-    </div>
-    
 
+@include('foot');
 
-
-</html>
