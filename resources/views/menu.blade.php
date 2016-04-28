@@ -124,7 +124,7 @@
                 <tbody>
                                      @foreach ($all as $user)   
                     <tr> 
-                    <td> {!!$user->f_id!!}</td>
+                    <td> {!!$user->id!!}</td>
                         <td>
                          
                 {!!$user->name!!}
@@ -144,7 +144,7 @@
                         <td>
                         
                       <input type="button" class="btn btn-primary" value="Add to cart" 
-                      onclick="AddtoCart('{!!$user->f_id!!}','{!!$user->name!!}','{!!$user->type!!}',<?php echo $p;?>)"/>
+                      onclick="AddtoCart('{!!$user->id!!}','{!!$user->name!!}','{!!$user->type!!}',<?php echo $p;?>)"/>
                          
                         </td>
                     </tr>

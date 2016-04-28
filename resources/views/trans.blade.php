@@ -13,8 +13,7 @@
 </br>
 </br>
  <?php print_r($last); ?>
- >
-<br/>
+ 
 <div class="row">
   <div class="container" >
   <div  class="col-md-5">
@@ -24,7 +23,7 @@
   <h3>Total price {{$last['pir']}}</h3>
   <h3>Your Referance id is {{$last['ref']}}</h3>
     <a href="#">
-      <img class="media-object" src="bkash.png" alt="...">
+      <img class="img-rounded" alt="Cinque Terre" width="804" height="536" src="bkash.png" alt="...">
     </a>
   
   

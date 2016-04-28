@@ -15,7 +15,7 @@ class Mycontroller extends Controller
    
 
     public function formenu(){
-    	$all=DB::table('food')->select('f_id','type','name','price')->orderBy('f_id', 'asc')->get();
+    	$all=DB::table('food')->select('id','type','name','price')->orderBy('id', 'asc')->get();
     	//echo "<pre>";
     	//print_r($all);
     	return view('menu')->with('all' ,$all);
@@ -64,7 +64,7 @@ class Mycontroller extends Controller
        //$ok=array($aid,$total,$rand);
       // $into=DB::insert('insert into delivery (f_list, bill, ref_id) values (?, ?, ?)', [$aid, $total,$rand]);
        foreach ($now as $value) {
-          $out[$i]=DB::select('select name,price from food where f_id = :id', ['id' => $value]);
+          $out[$i]=DB::select('select name,price from food where id = :id', ['id' => $value]);
           $i++;
        }
        return view('paying')->with(compact('out','ok'));
