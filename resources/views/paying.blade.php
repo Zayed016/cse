@@ -6,7 +6,7 @@ $plus=explode(",", $ok['p']);
 foreach ($plus as $key ) {
 	$k=$key+$k;
 }?>
-@include('menubar');
+@include('menubar')
 </br>
 </br>
 </br>
@@ -74,5 +74,12 @@ foreach ($plus as $key ) {
  </div>
  </div>
  </div>
+  <header>
 
+
+            <ul>
+                <li></li>
+              </ul>
+
+        </header>
 @include('foot')

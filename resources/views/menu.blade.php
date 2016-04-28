@@ -3,7 +3,7 @@
 
 	<meta charset="utf-8">
 		<title>Restaurant.com</title>
-		   @include('menubar');
+		   @include('menubar')
 </br>
 </br>
 </br>
@@ -105,13 +105,13 @@
 <div class="container-fluid">
 <div class="row">
   <div class="container" >
-  <div >
+ 
 <b>
-<table style="font-size: 14px"  class="table table-bordered" >
+<table style="font-size: 14px ; background-color: #EDF1F2;"  class="table table-bordered" >
     <tr>
         <td valign="top">
 
-            <table class="table table-condensed" class="table-responsive" class="table table-bordered">
+            <table style="background-color: #EDF1F2;" class="table table-condensed" class="table-responsive" class="table table-bordered">
                 <thead>
                     <tr><td>#</td>
                         <td >
@@ -157,7 +157,7 @@
         <td width="43%" valign="top" >
 
         <h3>Ordered Food <input style="float: right;" type="button" class="btn btn-danger" value="Remove" onclick="removefromcart()" /></h3>
-            <table  class="table table-bordered" class="table table-condensed" id="orderedProductsTbl">
+            <table style="background-color: #EDF1F2;" class="table table-bordered" class="table table-condensed" id="orderedProductsTbl">
                 <thead>
                     <tr>
                         <td>
@@ -207,17 +207,10 @@
     </tr>
 </table>
 
-
 </b>
-</div>
-</div>
-</div>
-</div>
-
-  
-</div>
-</div>
-</div>
 
 
-@include('foot');
+</div>
+</div>
+</div>
+@include('foot')

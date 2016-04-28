@@ -12,7 +12,8 @@
         <link href="css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
         <link href="css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
         <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
-        
+      
+
         
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
@@ -48,8 +49,8 @@
          <li><a href="home">Home</a></li>
         <li><a href="menu">Menu</a></li>
         <li><a href="reservation">Table book</a></li>
-      	<li><a href="#">About Us</a></li>
-      	<li><a href="#">Contact Us</a></li>
+      	<li><a href="about">About Us</a></li>
+      	<li><a href="contact">Contact Us</a></li>
       </ul>
       <div style="float: right"><form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -62,4 +63,5 @@
       
 </div>
 </nav>
+<div style="background-color: #E6EFF2;   ">
 
