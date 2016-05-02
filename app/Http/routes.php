@@ -19,9 +19,7 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
-Route::get('about', function () {
-    return view('about');
-});
+Route::get('about','Mycontroller@about');
 Route::get('contact', function () {
     return view('contact');
 });

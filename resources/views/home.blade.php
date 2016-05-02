@@ -3,21 +3,8 @@
 <head>
   <meta charset="utf-8">
     <title>Restaurant.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap-theme.css" rel="stylesheet">
-        
-
-   
-        
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        
-        <script type="text/javascript" src="js/npm.js"></script>
-       <!--  <script src="http://maps.googleapis.com/maps/api/js"></script> -->
-        
+    <!--  <script src="http://maps.googleapis.com/maps/api/js"></script> -->
+     </head>       
     <script>
     var myCenter=new google.maps.LatLng(24.37114,88.640467);
 
@@ -36,9 +23,8 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-    </head>
-<body>
-@include('menubar');
+
+@include('menubar')
  <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -80,10 +66,8 @@
 </div>
  
   
-</br>
-</br>
-</br>
-</br>
+<br/>
+<br/>
 
 
 
@@ -146,7 +130,4 @@
         </div>          
     </div>      
 </div>
-
-
-@include('foot');
-
+@include('foot')

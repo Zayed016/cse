@@ -4,8 +4,7 @@
 	<meta charset="utf-8">
 		<title>Restaurant.com</title>
 		   @include('menubar')
-</br>
-</br>
+
 </br>
 </br>
 </br>

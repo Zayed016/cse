@@ -32,6 +32,12 @@ class Mycontroller extends Controller
 
     }
 
+    public function about(){
+
+      $ab=DB::select('select type,name,mobile from stuff');
+
+      return view('about')->with('ab',$ab);
+    }
     public function atlast(MyRequest $request){
 
     $lo=input::all();
