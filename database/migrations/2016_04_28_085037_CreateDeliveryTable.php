@@ -15,8 +15,8 @@ class CreateDeliveryTable extends Migration
         Schema::create('delivery', function (Blueprint $table) {
             $table->increments('id');
             $table->text('f_list');
-            $table->integer('bill');
             $table->integer('ref_id')->unique();
+            $table->integer('paid');
             $table->timestamp('time');
         });
     }

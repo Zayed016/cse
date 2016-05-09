@@ -12,9 +12,9 @@ class CreateFoodTable extends Migration
      */
     public function up()
     {
-         Schema::create('food', function (Blueprint $table) {
+         Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('type');
+            $table->text('type_id');
             $table->text('name');
             $table->integer('price');
            
@@ -28,6 +28,6 @@ class CreateFoodTable extends Migration
      */
     public function down()
     {
-        Schema::drop('food');
+        Schema::drop('foods');
     }
 }

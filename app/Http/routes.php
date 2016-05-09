@@ -15,23 +15,32 @@ Route::get('/', function () {
     return view('home');
 });
 
-
 Route::get('home', function () {
     return view('home');
 });
 Route::get('about','Mycontroller@about');
+
+Route::get('admin',function(){
+	return view('admin');
+});
+
+Route::get('d',function(){
+	return view('ad');
+});
+
+Route::post('new', 'Mycontroller@login');
+
 Route::get('contact', function () {
     return view('contact');
 });
+
 Route::get('reservation', function () {
     return view('reservation');
 });
+
+
 Route::get('menu', 'Mycontroller@formenu');
 
 Route::post('buying', 'Mycontroller@sale');
-
-//Route::post('trans', 'MyController@transaction');
-
-//Route::get('tran', 'MyController@transaction');
 
 Route::post('final', 'MyController@atlast');

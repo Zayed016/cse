@@ -6,26 +6,18 @@ use App\Http\Requests\Request;
 
 class MyRequest extends Request
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
-    //protected $redirect = 'tran';
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+   
   public function rules()
 {
     return [
         
-        //'d' => 'required',
+        'username' => 'required',
+        'password' => 'required'
     ];
 }
 
@@ -33,7 +25,8 @@ class MyRequest extends Request
 {
     return [
         
-        //'d.required'  => 'A message is required',
+        'username.required'  => 'Username is required',
+        'password.required'  => 'Password is required'
     ];
 }
 }

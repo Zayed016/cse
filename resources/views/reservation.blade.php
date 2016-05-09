@@ -75,5 +75,3 @@
               </ul>
 
         </header>
-
-@include('foot')

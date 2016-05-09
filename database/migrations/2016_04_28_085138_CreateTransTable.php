@@ -17,8 +17,11 @@ class CreateTransTable extends Migration
             $table->integer('ref_id')->unique();
             $table->integer('t_id');
             $table->integer('bill');
+            $table->text('name');
             $table->text('address');
             $table->text('mobile');
+            $table->text('d_type');
+            $table->timestamp('d_time');
            
         });
     }

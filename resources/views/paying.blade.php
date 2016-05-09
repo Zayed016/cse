@@ -13,27 +13,69 @@ foreach ($plus as $key ) {
 </br>
 </br>
 </br>
+<!DOCTYPE html>
 
-<div style="float:right" class="container-fluid">
+
+<script type="text/javascript" charset="utf-8" async defer>
+var Totalprice=0;
+var atfirst=0;
+var array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+function inita(Iprice){
+    
+	atfirst=Iprice;
+	Totalprice=Totalprice+atfirst;
+	document.getElementById("getprice").innerHTML = ""+Totalprice;
+}
+console.log( JSON.stringify(object) );
+function multiply(count,price,id){
+
+		array[id-1]=price*(count-1);
+		Totalprice=0;
+		for(var i=0;i<30;i++){
+
+			 Totalprice=Totalprice+array[i];
+		}	
+		Totalprice=Totalprice+atfirst;
+		document.getElementById("getprice").innerHTML = ""+Totalprice;
+
+}	
+
+</script>
+<div  style="float:right" class="container-fluid">
 <div class="row">
   <div class="container" >
   <div  class="col-md-10">
 <ul style="font-size: 15px;" class="list-group">
+<h3 >Total Price:<span id="getprice"></span>Tk</h3><br/>
+<?php $u=1; $sum=0;?>
+{!!  Form::open(array('url' => 'final'));!!}
 @foreach ($out as $out) 
 @foreach ($out as $user) 
- 
+<?php $sum=$sum+$user->price;?>
+<label >
+<li class="list-group-item"><span >Name:</span> {!! $user->name; !!}</li>
+<li class="list-group-item">  <span >Price:</span>    {!! $user->price; !!}</li> 
+<li class="list-group-item">
 
-<label ><li class="list-group-item"><span >Name:</span> {!! $user->name; !!}</li><li class="list-group-item">  <span >Price:</span>    {!! $user->price; !!}</li></label>
+How many? &nbsp&nbsp&nbsp&nbsp
+
+<input type="number" min="1" max="30" required value="1" onkeyup="multiply(this.value,{!! $user->price; !!},{!! $u!!})" onclick="multiply(this.value,{!! $user->price; !!},{!! $u++ !!})"></li>
+</label>
 
 
+
+<input type="hidden" name="ids[<?=$i?>]" value="{!! $user->id !!}">
+<input type="hidden" name="types[<?=$i?>]" value="{!! $user->type_id !!}">
+
+<?php $i++;?>
 @endforeach
 @endforeach
-	
+	<body onload="inita({!! $sum !!})">
  </ul>
  <div  class="col-md-8">
-<h3 >Total Price:&nbsp{!! $k; !!} Tk</h3><br/>
+<!-- <h3 >Total Price:&nbsp{!! $k; !!} Tk</h3><br/> -->
 
- {!!  Form::open(array('url' => 'final'));!!}
+ 
  	
  	<label style="font-size: 16px;">Delivery type: </label>
    <label style="font-size: 16px;" class="radio">
@@ -45,7 +87,12 @@ foreach ($plus as $key ) {
 	<br/><br/>
 	<input type="hidden" name="pir" value="{!! $k; !!}">
 	<input type="hidden" name="ref" value="{!! $ok['r'] !!}">
-
+	
+	<fieldset class="form-group">
+	<label for="address"> Name </label>
+	<input type="text" class="form-control" name="name" required value="">
+	<small class="text-muted">Please write your full name</small>
+	</fieldset>
 	<fieldset class="form-group">
 	<label for="address"> Address </label>
 	<input type="text" class="form-control" name="add" required value="">
@@ -56,7 +103,22 @@ foreach ($plus as $key ) {
 	<input type="text" class="form-control" name="mobile" required value="" >
 	<small class="text-muted">You will be notify throgh this mobile once you paid and also before delivery</small>
  	</fieldset>
-	<input type="submit" class="btn btn-success" value="Confirm" />
+ 	<label for="dt">Date and Time</label>
+            <fieldset class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' required class="form-control input-lg" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </fieldset> 
+        
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+	<input type="submit" class="btn btn-success" value="Proceed to payment" />
  	{!!  Form::close(); !!}
 <!-- @if (count($errors) > 0)
     <div class="alert alert-danger">

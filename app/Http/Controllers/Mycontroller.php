@@ -9,18 +9,20 @@ use App\Http\Requests;
 use Input;
 use Validator;
 use Redirect;
+ use Auth;
 
 class Mycontroller extends Controller
 {
    
 
     public function formenu(){
-    	$all=DB::table('food')->select('id','type','name','price')->orderBy('id', 'asc')->get();
-    	//echo "<pre>";
+    	//$all=DB::table('food')->select('id','type','name','price')->orderBy('id', 'asc')->get();
+    	$lists=DB::select('select * from foodtypes');
     	//print_r($all);
-    	return view('menu')->with('all' ,$all);
+    	return view('menu')->with(compact('lists'));
     }
 
+    
     public function transaction(){
     	
        // print_r($request->rules());
@@ -32,16 +34,33 @@ class Mycontroller extends Controller
 
     }
 
+    public function login(MyRequest $request){
+
+      $userdata = array(
+    'username'    => Input::get('username'),
+    'password' => Input::get('password')
+    );
+
+    if (Auth::attempt($userdata)) {        
+        return Redirect::to('')->with('success', 'You have logged in successfully');
+    } else 
+    return Redirect::to('d')->withErrors(array('need' => 'Invalid Username or Password'))->withInput(Input::except('password'));
+    
+    }
+
     public function about(){
 
       $ab=DB::select('select type,name,mobile from stuff');
 
-      return view('about')->with('ab',$ab);
+     
+
+
+      return view('about')->with(compact('ab'));
     }
-    public function atlast(MyRequest $request){
+    public function atlast(){
 
     $lo=input::all();
-   // $trans=DB::insert('insert into trans (ref_id, t_id, bill, address, mobile , d_type) values (?, ?, ?, ?, ?, ?)', [ $lo['ref'],0,$lo['pir'],$lo['add'],$lo['mobile'],$lo['de']]);
+    $trans=DB::insert('insert into trans (ref_id, t_id, bill, name, address, mobile , d_type) values (?, ?, ?, ?, ?, ?, ?)', [ $lo['ref'],0,$lo['pir'],$lo['name'],$lo['add'],$lo['mobile'],$lo['de']]);
     return view('trans')->with('last',$lo);
     
     }
@@ -68,9 +87,9 @@ class Mycontroller extends Controller
        $rand=rand(1000,9999);
        $ok['r']=$rand;
        //$ok=array($aid,$total,$rand);
-      // $into=DB::insert('insert into delivery (f_list, bill, ref_id) values (?, ?, ?)', [$aid, $total,$rand]);
+       $into=DB::insert('insert into delivery (f_list, ref_id) values (?, ?)', [$ok['i'], $rand]);
        foreach ($now as $value) {
-          $out[$i]=DB::select('select name,price from food where id = :id', ['id' => $value]);
+          $out[$i]=DB::select('select id,name,price,type_id from foods where id = :id', ['id' => $value]);
           $i++;
        }
        return view('paying')->with(compact('out','ok'));

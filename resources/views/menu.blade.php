@@ -9,7 +9,29 @@
 </br>
 </br>
 </br>
-
+    <script>
+function showUser(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET","getuser.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
   <script type="text/javascript">
 
     var foodcart = [];
@@ -31,6 +53,7 @@
             var cellName = row.insertCell(0);
             var celltype = row.insertCell(1);
             var cellPrice = row.insertCell(2);
+            var remove=row.insertCell(3);
             
             cellPrice.align="right";
             
@@ -38,6 +61,7 @@
             cellName.innerHTML = foodcart[product].Name;
             celltype.innerHTML = foodcart[product].type;
             cellPrice.innerHTML = foodcart[product].Price;
+            remove.innerHTML=remove.innerHTML+"<input type='button' class='btn btn-danger' value='Remove' onclick='removefromcart()' />"
             cart_total_price+=foodcart[product].Price;
             
 
@@ -50,6 +74,7 @@
       
        var singleProduct = {};
        
+       document.getElementById(id).disabled = true;
        singleProduct.Id=id;
        singleProduct.Name=name;
        singleProduct.type=type;
@@ -99,64 +124,25 @@
 
 
 </script>
-
-    
 <div class="container-fluid">
 <div class="row">
   <div class="container" >
- 
-<b>
-<table style="font-size: 14px ; background-color: #EDF1F2;"  class="table table-bordered" >
-    <tr>
-        <td valign="top">
+  <div class="col-md-6">
 
-            <table style="background-color: #EDF1F2;" class="table table-condensed" class="table-responsive" class="table table-bordered">
-                <thead>
-                    <tr><td>#</td>
-                        <td >
-                            Food for sale
-                        </td>
-                        <td>Type</td>
-                        <td>Price</td>
-                    </tr>
-                </thead>
-                <tbody>
-                                     @foreach ($all as $user)   
-                    <tr> 
-                    <td> {!!$user->id!!}</td>
-                        <td>
-                         
-                {!!$user->name!!}
+   <form>
+<select class="form-control input-md"  name="users" onchange="showUser(this.value)">
+  <option value="">Select A type of food</option>
+  @foreach ($lists as $list)
+  <option value="{{$list->id}}">{{$list->name}}</option>
+  @endforeach
+   </select>
+</form>
+<br>
 
-                        </td>
-                              <td>
-                     {!!$user->type!!}    
-                
-
-                        </td>
-                        <td>
-                          {!!
-
-                        $p=$user->price;
-                          $user->price!!}
-                        </td>
-                        <td>
-                        
-                      <input type="button" class="btn btn-primary" value="Add to cart" 
-                      onclick="AddtoCart('{!!$user->id!!}','{!!$user->name!!}','{!!$user->type!!}',<?php echo $p;?>)"/>
-                         
-                        </td>
-                    </tr>
-                    @endforeach
-                        
-                </tbody>
-
-            </table>
-        </td>
-        <td width="43%" valign="top" >
-
-        <h3>Ordered Food <input style="float: right;" type="button" class="btn btn-danger" value="Remove" onclick="removefromcart()" /></h3>
-            <table style="background-color: #EDF1F2;" class="table table-bordered" class="table table-condensed" id="orderedProductsTbl">
+<div id="txtHint"><b>Food will be listed here...</b></div>
+</div>
+<div class="col-md-6">
+<table style='font-weight: bold; font-size: 16px; background-color: #EDF1F2;' class="table table-bordered" class="table table-condensed" id="orderedProductsTbl">
                 <thead>
                     <tr>
                         <td>
@@ -169,11 +155,14 @@
                             Price
                             
                         </td>
+
                     </tr>
+
                 </thead>
                 <tbody id="orderedProductsTblBody">
 
                 </tbody>
+
                 <tfoot>
                     <tr>
                       {!!  Form::open(array('url' => 'buying'));!!}
@@ -185,31 +174,15 @@
 
                 </tfoot>
             </table>
-             
+
             <input type="hidden" id="hidId" name="hidId" value="">
             <input type="hidden" id="hidName" name="hidName" value="">
             <input type="hidden" id="hidType" name="hidType" value="">
             <input type="hidden" id="hidPrice" name="hidPrice" value="">
             <input type="submit" class="btn btn-success" onclick="passData()" style=" float:right" value="Buy" />
              {!!  Form::close(); !!}
-       
-        @if (count($errors) > 0)
-        <div class="alert alert-danger" style="clear :right">
-        
-        @foreach ($errors->all() as $error)
-                {{ $errors->first('hidId') }}
-            @endforeach
-        
-    </div>
-@endif
-        </td>
-    </tr>
-</table>
-
-</b>
-
-
 </div>
 </div>
 </div>
-@include('foot')
+</div>
+
