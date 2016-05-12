@@ -20,8 +20,8 @@ Route::get('home', function () {
 });
 Route::get('about','Mycontroller@about');
 
-Route::get('admin',function(){
-	return view('admin');
+Route::get('dashboard',function(){
+	return view('page');
 });
 
 Route::get('d',function(){

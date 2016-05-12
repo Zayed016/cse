@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
+use Authenticatable, CanResetPassword;
 use Illuminate\Http\Request;
 use App\Http\Requests\MyRequest;
 use DB;
 use App\Http\Requests;
 use Input;
+use Cache;
+use Auth;
 use Validator;
 use Redirect;
- use Auth;
+use Illuminate\Routing\Controller;
 
 class Mycontroller extends Controller
 {
@@ -35,26 +39,26 @@ class Mycontroller extends Controller
     }
 
     public function login(MyRequest $request){
-
-      $userdata = array(
-    'username'    => Input::get('username'),
-    'password' => Input::get('password')
-    );
-
-    if (Auth::attempt($userdata)) {        
-        return Redirect::to('')->with('success', 'You have logged in successfully');
-    } else 
-    return Redirect::to('d')->withErrors(array('need' => 'Invalid Username or Password'))->withInput(Input::except('password'));
+  
+     if (Auth::attempt(['username' => $request->input('username'), 'password' => $request->input('password')])) {
+            
+            return Redirect::to('dashboard')->with('success', 'You have logged in successfully');
+     }  else 
+        {
+        return Redirect::to('d')->withErrors(array('need' => 'Invalid Username or Password'))->withInput(Input::except('password'));
+        }
+    // if($auth){  
+    //     
+    // } else 
+    // return Redirect::to('d')->withErrors(array('need' => 'Invalid Username or Password'))->withInput(Input::except('password'));
     
-    }
+     }
 
     public function about(){
 
       $ab=DB::select('select type,name,mobile from stuff');
 
-     
-
-
+    
       return view('about')->with(compact('ab'));
     }
     public function atlast(){
