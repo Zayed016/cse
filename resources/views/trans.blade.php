@@ -18,6 +18,7 @@
   <div class="container" >
   <div  class="col-md-5">
 
+  <h4>Your Address is {{$last['name']}}</h4>
   <h4>Your Address is {{$last['add']}}</h4>
   <h4>Your Mobile number is {{$last['mobile']}}</h4>
   <h3>Total price {{$last['pir']}}</h3>

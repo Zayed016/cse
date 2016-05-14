@@ -38,5 +38,5 @@ class Admin extends Model implements AuthenticatableContract,
      */
     protected $fillable = ['username', 'password'];
 
-      
+     
 }

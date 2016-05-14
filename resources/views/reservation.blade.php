@@ -13,39 +13,38 @@
 </br>
 </br>
 
-<body>
-
 <div style="float:right" class="container-fluid">
 <div class="row">
   <div class="container" >
   <div  class="col-md-5">
-<form>
-<fieldset class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control input-lg"  placeholder="Your full name">
+  {!!  Form::open(array('url' => 'booking','class'=>"form-horizontal"));!!}
+  
+  <fieldset class="form-group">
+    <label for="name">Name&nbsp&nbsp&nbsp<p style="color:red;">{{ $errors->first('name') }}</p></label>
+    <input type="text" name="name" class="form-control input-lg" value="{{ old('name') }}" placeholder="Your full name">
     
   </fieldset>
   <fieldset class="form-group">
-    <label for="Email">Email address</label>
-    <input type="email" class="form-control input-lg"  placeholder="Enter email">
+    <label for="Email">Email address&nbsp&nbsp&nbsp<p style="color:red;">{{ $errors->first('email') }}</p></label>
+    <input type="email" name="email" class="form-control input-lg"  placeholder="Enter email">
     <small class="text-muted">We'll never share your email with anyone else.</small>
   </fieldset>
    <fieldset class="form-group">
-    <label for="party">Party size</label>
-    <input type="number" class="form-control input-lg"  placeholder="Total person">
+    <label for="party">Party size&nbsp&nbsp&nbsp<p style="color:red;">{{ $errors->first('party') }}</p></label>
+    <input type="number" name="party" min="2" max="50" class="form-control input-lg"  placeholder="Total person">
     <small class="text-muted">Once you select can't be changed</small>
   </fieldset>
   <fieldset class="form-group">
-    <label for="party">Mobile Number</label>
-    <input type="text" class="form-control input-lg"  placeholder="Your personal number">
+    <label for="mobile">Mobile Number&nbsp&nbsp&nbsp<p style="color:red;">{{ $errors->first('mobile') }}</p></label>
+    <input type="text" name="mobile" class="form-control input-lg"  placeholder="Your personal number">
     </fieldset>
 
 
-
-    <label for="dt">Date and Time</label>
-            <fieldset class="form-group">
+    <fieldset class="form-group">
+    <label for="dt">Date and Time&nbsp&nbsp&nbsp<p style="color:red;">{{ $errors->first('time') }}</p></label>
+            
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control input-lg" />
+                    <input type='text' name="time" class="form-control input-lg" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -60,18 +59,22 @@
  
 
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+     
+                {!!  Form::close(); !!}
 
 </div>
 </div>
 </div>
 </div>
-
-        <header>
-
-
-            <ul>
-                <li></li>
-              </ul>
-
-        </header>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

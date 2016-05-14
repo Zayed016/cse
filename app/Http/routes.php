@@ -18,17 +18,16 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
-Route::get('about','Mycontroller@about');
 
-Route::get('dashboard',function(){
-	return view('page');
+Route::group([ 'middleware' => 'admin'], function() {
+
+    Route::get('dashboard','Mycontroller@info');
+	
 });
-
-Route::get('d',function(){
+   
+    Route::get('admin',function(){
 	return view('ad');
 });
-
-Route::post('new', 'Mycontroller@login');
 
 Route::get('contact', function () {
     return view('contact');
@@ -38,9 +37,16 @@ Route::get('reservation', function () {
     return view('reservation');
 });
 
+Route::post('booking', 'Mycontroller@reserve');
+
+Route::post('new', 'Mycontroller@login');
+
+Route::get('about','Mycontroller@about');
 
 Route::get('menu', 'Mycontroller@formenu');
 
 Route::post('buying', 'Mycontroller@sale');
 
-Route::post('final', 'MyController@atlast');
+Route::post('send', 'Mycontroller@message');
+
+Route::post('final', 'Mycontroller@atlast');

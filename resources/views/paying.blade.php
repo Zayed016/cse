@@ -59,7 +59,7 @@ function multiply(count,price,id){
 
 How many? &nbsp&nbsp&nbsp&nbsp
 
-<input type="number" min="1" max="30" required value="1" onkeyup="multiply(this.value,{!! $user->price; !!},{!! $u!!})" onclick="multiply(this.value,{!! $user->price; !!},{!! $u++ !!})"></li>
+<input type="number" name="no[{!! $user->id !!}]" min="1" max="30" required value="1" onkeyup="multiply(this.value,{!! $user->price; !!},{!! $u!!})" onclick="multiply(this.value,{!! $user->price; !!},{!! $u++ !!})"></li>
 </label>
 
 
@@ -85,7 +85,7 @@ How many? &nbsp&nbsp&nbsp&nbsp
 	<input type="radio"  name="de" value="pickup" checked>
 	<b>Pickup delivery</b></label>
 	<br/><br/>
-	<input type="hidden" name="pir" value="{!! $k; !!}">
+	
 	<input type="hidden" name="ref" value="{!! $ok['r'] !!}">
 	
 	<fieldset class="form-group">
@@ -106,7 +106,7 @@ How many? &nbsp&nbsp&nbsp&nbsp
  	<label for="dt">Date and Time</label>
             <fieldset class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' required class="form-control input-lg" />
+                    <input type='text' name='time' required class="form-control input-lg" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -114,9 +114,11 @@ How many? &nbsp&nbsp&nbsp&nbsp
             </fieldset> 
         
         <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
+           $(function() {
+    $('#datetimepicker1').datetimepicker({
+
+    });
+  });
         </script>
 	<input type="submit" class="btn btn-success" value="Proceed to payment" />
  	{!!  Form::close(); !!}
@@ -144,4 +146,3 @@ How many? &nbsp&nbsp&nbsp&nbsp
               </ul>
 
         </header>
-@include('foot')

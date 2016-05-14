@@ -14,7 +14,7 @@
   <div  class="col-md-4">
 
 	 {!!  Form::open(array('url' => 'new'));!!}
-	 {!! csrf_field() !!}
+	  {!! csrf_field() !!}
 	 {{$errors->first('need')}}
 	 {{ $errors->first('username') }}
 	<fieldset class="form-group">

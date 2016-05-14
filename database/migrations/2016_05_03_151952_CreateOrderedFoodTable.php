@@ -14,7 +14,7 @@ class CreateOrderedFoodTable extends Migration
     {
          Schema::create('orderedfood', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ref_id')->unique();
+            $table->integer('ref_id');
             $table->text('food_id');
             $table->text('type_id');
             $table->integer('how_many');

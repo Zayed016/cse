@@ -2,28 +2,20 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/bootstrap-theme.css" rel="stylesheet">
-        <link href="css/datepicker.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker.min.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker.standalone.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker3.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
-        <link href="css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        
+        
         <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
       
 
-        
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="js/npm.js"></script>
-        <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
-    <script type="text/javascript" src="js/transition.js"></script>
-    <script type="text/javascript" src="js/collapse.js"></script>
+    
+   
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="js/moment-with-locales.js"></script>
 

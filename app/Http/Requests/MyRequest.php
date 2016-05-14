@@ -15,7 +15,7 @@ class MyRequest extends Request
   public function rules()
 {
     return [
-        
+
         'username' => 'required',
         'password' => 'required'
     ];
@@ -25,6 +25,7 @@ class MyRequest extends Request
 {
     return [
         
+
         'username.required'  => 'Username is required',
         'password.required'  => 'Password is required'
     ];

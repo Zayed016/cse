@@ -1,1 +1,1 @@
-{{$errors->first('success')}}
+{{$user}}
