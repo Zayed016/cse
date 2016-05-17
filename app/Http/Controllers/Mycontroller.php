@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Admin;
-use Authenticatable, CanResetPassword;
-use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+
 use App\Http\Requests\MyRequest;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\ReservationRequest;
+
+use App\Admin;
 use DB;
-use App\Http\Requests;
 use Input;
 use Auth;
 use Validator;
 use Redirect;
-use Illuminate\Routing\Controller;
+
 
 
 class Mycontroller extends Controller
@@ -31,8 +31,9 @@ class Mycontroller extends Controller
 
     public function reserve(ReservationRequest $request){
       $send=$request->all(); 
-     print_r($send);
-      // DB::table('res')->insert( ['ref_id' => $lo['ref'] ,'food_id' =>$AyeD[$i] ,'type_id' =>$tp[$i] , 'how_many' => $value[$AyeD[$i]] ]  );
+      $rand=rand(1000,9999);
+     //print_r($send);
+    DB::table('reserve')->insert( ['name' => $send['name'],'ref' => $rand ,'email' =>$send['email'] ,'size' =>$send['party'] , 'mobile' =>$send['mobile'] , 'when' =>$send['time']  ]  );
   
     }
     public function transaction(){
@@ -56,10 +57,11 @@ class Mycontroller extends Controller
      $request->session()->flash('alert-success', 'User was successful added!');
       //return view('contact');
     }
+
     public function info(){
       $user = Auth::user();
            
-           return view('page')->with(compact('user'));
+      return view('page')->with(compact('user'));
     }
       
                 // $username=$request->input('username');

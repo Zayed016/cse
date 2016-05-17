@@ -23,6 +23,7 @@ class CreateReservationTable extends Migration
          $table->integer('ref')->unique();
          $table->integer('paid');
          $table->timestamp('when');
+         });
     }
 
     /**
@@ -30,8 +31,8 @@ class CreateReservationTable extends Migration
      *
      * @return void
      */
-    public function down()
+   public function down()
     {
-       Schema::drop('reserve');
+        Schema::drop('reserve');
     }
 }
