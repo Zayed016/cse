@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\MyRequest;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\ReservationRequest;
@@ -103,7 +104,7 @@ class Mycontroller extends Controller
       return view('about')->with(compact('ab'));
     }
     
-    public function atlast(){
+    public function atlast(CustomerRequest $request){
     
       $total=0;
     $lo=input::all();
@@ -121,7 +122,7 @@ class Mycontroller extends Controller
    
      $total=$total+$dam->price*$value[$key];
      }  
-     DB::table('trans')->insert(['name' => $lo['name'] ,'t_id' =>0 ,'ref_id' => $lo['ref'] ,'address' =>$lo['add'] ,'mobile' =>$lo['mobile'] , 'd_type' => $lo['de'], 'd_time' =>$lo['time'], 'bill' => $total]  );
+     DB::table('trans')->insert(['name' => $lo['name'] ,'t_id' =>0 ,'ref_id' => $lo['ref'] ,'address' =>$lo['add'] ,'mobile' =>$lo['mobile'] , 'd_type' => $lo['delivery'], 'd_time' =>$lo['time'], 'bill' => $total]  );
      $lo['pir']=$total;
    return view('trans')->with('last',$lo);
     

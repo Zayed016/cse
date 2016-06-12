@@ -18,15 +18,17 @@ foreach ($plus as $key ) {
 
 <script type="text/javascript" charset="utf-8" async defer>
 var Totalprice=0;
+var main=0;
 var atfirst=0;
 var array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 function inita(Iprice){
     
 	atfirst=Iprice;
-	Totalprice=Totalprice+atfirst;
+	Totalprice=Totalprice+atfirst+main;
+
 	document.getElementById("getprice").innerHTML = ""+Totalprice;
 }
-console.log( JSON.stringify(object) );
+
 function multiply(count,price,id){
 
 		array[id-1]=price*(count-1);
@@ -35,10 +37,21 @@ function multiply(count,price,id){
 
 			 Totalprice=Totalprice+array[i];
 		}	
-		Totalprice=Totalprice+atfirst;
+		Totalprice=Totalprice+atfirst+main;
+		
 		document.getElementById("getprice").innerHTML = ""+Totalprice;
 
 }	
+function homedelivery(){
+	main=30;
+	Totalprice=main+Totalprice;
+	document.getElementById("getprice").innerHTML = ""+Totalprice;
+}
+function del(){
+	main=0;
+	Totalprice=Totalprice-30;
+	document.getElementById("getprice").innerHTML = ""+Totalprice;
+}
 
 </script>
 <div  style="float:right" class="container-fluid">
@@ -68,7 +81,7 @@ How many? &nbsp&nbsp&nbsp&nbsp
 <input type="hidden" name="types[<?=$i?>]" value="{!! $user->type_id !!}">
 
 <?php $i++;?>
-@endforeach
+	@endforeach
 @endforeach
 	<body onload="inita({!! $sum !!})">
  </ul>
@@ -79,15 +92,15 @@ How many? &nbsp&nbsp&nbsp&nbsp
  	
  	<label style="font-size: 16px;">Delivery type: </label>
    <label style="font-size: 16px;" class="radio">
-	<input type="radio"  name="de" value="home" >
+	<input type="radio"  name="delivery" onchange="homedelivery()" value="home" >
 	<b>Home delivery <small class="text-muted">(Extra 30 taka will be charged after receiving item)</small></b></label>
 	<label style="font-size: 16px;" class="radio">
-	<input type="radio"  name="de" value="pickup" checked>
+	<input type="radio"  name="delivery" onchange="del()" value="pickup" checked>
 	<b>Pickup delivery</b></label>
 	<br/><br/>
 	
 	<input type="hidden" name="ref" value="{!! $ok['r'] !!}">
-	
+
 	<fieldset class="form-group">
 	<label for="address"> Name </label>
 	<input type="text" class="form-control" name="name" required value="">

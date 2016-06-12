@@ -24,7 +24,12 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::get('dashboard','Mycontroller@info');
 	
 });
-   
+
+    Route::get('logout',function(){
+	Auth::logout();
+	return view('ad');
+});
+
     Route::get('admin',function(){
 	return view('ad');
 });

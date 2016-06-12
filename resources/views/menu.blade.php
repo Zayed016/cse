@@ -128,8 +128,7 @@ function showUser(str) {
 <div class="row">
   <div class="container" >
   <div class="col-md-6">
-
-   <form>
+{{ $errors->first('hidId') }}   <form>
 <select class="form-control input-md"  name="users" onchange="showUser(this.value)">
   <option value="">Select A type of food</option>
   @foreach ($lists as $list)
