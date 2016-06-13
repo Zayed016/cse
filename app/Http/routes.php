@@ -22,6 +22,31 @@ Route::get('home', function () {
 Route::group([ 'middleware' => 'admin'], function() {
 
     Route::get('dashboard','Mycontroller@info');
+    Route::get('order','Mycontroller@order');
+
+    Route::get('fooding','Mycontroller@fooding');
+
+    Route::get('editfood/{id}',function ($id) {
+        $food=DB::select('select * from foods where id = :id', ['id' => $id]);
+        $list=DB::select('select * from foodtypes');
+        return view('foodediting')->with(compact('food','list'));
+    });
+    
+    Route::post('foodedit','Mycontroller@updatefood');
+
+    Route::get('deletefood/{id}',function($id){
+        $del=DB::table('foods')->where('id', '=', $id)->delete();;
+        if($del==true){
+            Session::flash('status', 'Data delete was successful!');
+        } else {
+           Session::flash('status', 'Date delete was unsuccessful!'); 
+        } 
+         return redirect()->intended('fooding');
+    });
+
+    Route::get('res','Mycontroller@res');
+    Route::get('stuff','Mycontroller@stuff');
+    Route::get('received','Mycontroller@fromcustomer');
 	
 });
 

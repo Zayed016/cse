@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CustomerRequest;
+use Session;
 use App\Http\Requests\MyRequest;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\ReservationRequest;
@@ -56,7 +57,7 @@ class Mycontroller extends Controller
 
     $sql=DB::insert('insert into contact (name, email, phone, message, c_time) values (?, ?, ?, ?, ?)', [ $send['name'],$send['email'],$send['phone'],$send['message'],$time]);
      $request->session()->flash('alert-success', 'User was successful added!');
-      //return view('contact');
+      return view('contact');
     }
 
     public function info(){
@@ -64,7 +65,40 @@ class Mycontroller extends Controller
            
       return view('page')->with(compact('user'));
     }
+    
+    public function order(){
+
+    } 
+    public function fooding(){
+
+      $sql=DB::select('select * from foods');
+      $tql=DB::select('select * from foodtypes');
+
+      return view('fooding')->with(compact('sql','tql'));
+    }
+    public function updatefood(){
+      $all=Input::all();
+        print_r($all);
+        $in=DB::table('foods')
+            ->where('id', 1)
+            ->update(['name' => $all['fname'],'type_id'=> $all['type'], 'price' => $all['fprice']]);
+        if($in=true){
+          Session::flash('status', 'Data update was successful!');
+        } else {
+           Session::flash('status', 'Date update was unsuccessful!'); 
+        }
+        return redirect()->intended('fooding');
+    }
+    public function res(){
       
+    }
+    public function stuff(){
+      
+    }
+    public function fromcustomer(){
+      
+    }
+
                 // $username=$request->input('username');
             // $username=admin;
             // $find = Admin::find($username);
