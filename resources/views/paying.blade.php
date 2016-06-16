@@ -62,6 +62,7 @@ function del(){
 <h3 >Total Price:<span id="getprice"></span>Tk</h3><br/>
 <?php $u=1; $sum=0;?>
 {!!  Form::open(array('url' => 'final'));!!}
+{!! csrf_field() !!}
 @foreach ($out as $out) 
 @foreach ($out as $user) 
 <?php $sum=$sum+$user->price;?>

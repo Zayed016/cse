@@ -42,8 +42,7 @@ class Mycontroller extends Controller
     	
        // print_r($request->rules());
        // DELETE FROM delivery WHERE time <NOW() - INTERVAL 1 MINUTE AND paid=0
-        // $vali=Validator::make($request);
-        // if ($vali->fails()) {
+       
         return view('trans');
         // }
 
@@ -53,11 +52,11 @@ class Mycontroller extends Controller
      $send=$request->all(); 
      //print_r($send);
     
-     $time = date("Y-m-d H:i:s"); 
+     
 
-    $sql=DB::insert('insert into contact (name, email, phone, message, c_time) values (?, ?, ?, ?, ?)', [ $send['name'],$send['email'],$send['phone'],$send['message'],$time]);
-     $request->session()->flash('alert-success', 'User was successful added!');
-      return view('contact');
+    $sql=DB::insert('insert into contact (name, email, phone, message) values (?, ?, ?, ?)', [ $send['name'],$send['email'],$send['phone'],$send['message']]);
+     $request->session()->flash('alert-success', 'Thank you for your feedback, we will get back to you soon');
+       return redirect()->intended('contact');
     }
 
     public function info(){
@@ -67,7 +66,10 @@ class Mycontroller extends Controller
     }
     
     public function order(){
+      $all=DB::table('trans')->where('t_id','!=','0' ,'and','d_time','>','NOW()')->orderby('d_time')->get();
+      //ll=DB::select('select * from trans where d_time >NOW() order by d_time');
 
+      return view('showorder')->with(compact('all'));
     } 
     public function fooding(){
 
@@ -93,11 +95,11 @@ class Mycontroller extends Controller
       
     }
     public function stuff(){
-      
+      $all=DB::table('stuff')->select('*')->orderBy('id', 'asc')->get();
+      echo "<pre>";
+      print_r($all);
     }
-    public function fromcustomer(){
-      
-    }
+   
 
                 // $username=$request->input('username');
             // $username=admin;
@@ -146,7 +148,9 @@ class Mycontroller extends Controller
     $value=$lo['no'];
     $AyeD=$lo['ids'];
     $tp=$lo['types'];
-   
+    if($lo['delivery']=='home'){
+      $total=$total+30;
+    }
    for ($i=1; $i <=sizeof($tp); $i++) { 
       
    DB::table('orderedfood')->insert( ['ref_id' => $lo['ref'] ,'food_id' =>$AyeD[$i] ,'type_id' =>$tp[$i] , 'how_many' => $value[$AyeD[$i]] ]  );
@@ -183,9 +187,8 @@ class Mycontroller extends Controller
        $ok['p']=$_POST['hidPrice'];
        $rand=rand(1000,9999);
        $ok['r']=$rand;
-       //$ok=array($aid,$total,$rand);
-       $to = date("Y-m-d H:i:s"); 
-      $into=DB::insert('insert into delivery (f_list, ref_id, time ) values (?, ?, ?)', [$ok['i'], $rand, $to ]);
+       
+      $into=DB::insert('insert into delivery (f_list, ref_id ) values (?, ?)', [$ok['i'], $rand ]);
        foreach ($now as $value) {
           $out[$i]=DB::select('select id,name,price,type_id from foods where id = :id', ['id' => $value]);
           $i++;

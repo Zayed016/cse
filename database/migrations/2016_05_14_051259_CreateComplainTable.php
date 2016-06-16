@@ -18,7 +18,8 @@ class CreateComplainTable extends Migration
          $table->text('email');
          $table->text('phone');
          $table->text('message');
-         $table->timestamp('c_time');
+         $table->integer('status');
+         $table->timestamp('c_time')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
         });
     }

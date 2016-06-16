@@ -22,20 +22,68 @@ Route::get('home', function () {
 Route::group([ 'middleware' => 'admin'], function() {
 
     Route::get('dashboard','Mycontroller@info');
-    Route::get('order','Mycontroller@order');
 
+    Route::get('order','Mycontroller@order');
+    
     Route::get('fooding','Mycontroller@fooding');
 
     Route::get('editfood/{id}',function ($id) {
+
         $food=DB::select('select * from foods where id = :id', ['id' => $id]);
+
         $list=DB::select('select * from foodtypes');
+
         return view('foodediting')->with(compact('food','list'));
     });
     
     Route::post('foodedit','Mycontroller@updatefood');
 
+    Route::get('addfood',function(){
+
+        $types=DB::select('select * from foodtypes');
+
+        return view('addfood')->with(compact('types'));
+    });
+    Route::post('foodadd',function(){
+
+        $all=Input::all();
+
+     $in=DB::table('foods')->insert([
+    ['name' => $all['name'], 'type_id' => $all['type'] ,'price' => $all['price']]
+            ]);
+
+     if($in==true){
+            Session::flash('status', 'Data added successfully!');
+        } else {
+           Session::flash('status', 'Date addition unsuccessful!'); 
+        } 
+         return redirect()->intended('fooding');
+    });
+
+    Route::get('addtype',function(){
+
+         $types=DB::select('select * from foodtypes');
+
+         return view('type')->with(compact('types'));
+    });
+    Route::post('typeadd',function(){
+
+        $all=Input::all();
+
+     $in=DB::table('foodtypes')->insert(['name' => $all['type'] ]);
+
+        if($in==true){
+            Session::flash('status', 'Data added successfully!');
+        } else {
+           Session::flash('status', 'Date addition unsuccessful!'); 
+        } 
+         return redirect()->intended('addtype');
+    });
+
     Route::get('deletefood/{id}',function($id){
-        $del=DB::table('foods')->where('id', '=', $id)->delete();;
+
+        $del=DB::table('foods')->where('id', '=', $id)->delete();
+
         if($del==true){
             Session::flash('status', 'Data delete was successful!');
         } else {
@@ -44,9 +92,15 @@ Route::group([ 'middleware' => 'admin'], function() {
          return redirect()->intended('fooding');
     });
 
+
     Route::get('res','Mycontroller@res');
+
     Route::get('stuff','Mycontroller@stuff');
-    Route::get('received','Mycontroller@fromcustomer');
+
+    Route::get('received',function(){
+        $get=DB::table('contact')->where('status','=','0')->orderby('c_time')->get();
+        return view('feedback')->with(compact('get'));
+    });
 	
 });
 

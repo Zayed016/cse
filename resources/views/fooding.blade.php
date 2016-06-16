@@ -1,9 +1,12 @@
+<h3><a href="addfood">Add new food</a>&nbsp&nbsp&nbsp
+<a href="addtype">Add new Type</a></h3>
 @foreach ($tql as $type)
 <?php
 $u[$type->id]=$type->name;
 ?>
 @endforeach
 {{ Session::get('status') }}
+
 <table border="1">
 
 	<thead>
