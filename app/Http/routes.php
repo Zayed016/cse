@@ -93,7 +93,10 @@ Route::group([ 'middleware' => 'admin'], function() {
     });
 
 
-    Route::get('res','Mycontroller@res');
+    Route::get('res',function(){
+        $get=DB::table('reserve')->orderby('when')->get();
+        return view('showreserve')->with(compact('get'));
+    });
 
     Route::get('stuff','Mycontroller@stuff');
 

@@ -35,7 +35,13 @@ class Mycontroller extends Controller
       $send=$request->all(); 
       $rand=rand(1000,9999);
      //print_r($send);
-    DB::table('reserve')->insert( ['name' => $send['name'],'ref' => $rand ,'email' =>$send['email'] ,'size' =>$send['party'] , 'mobile' =>$send['mobile'] , 'when' =>$send['time']  ]  );
+    $in=DB::table('reserve')->insert( ['name' => $send['name'],'ref' => $rand ,'email' =>$send['email'] ,'size' =>$send['party'] , 'mobile' =>$send['mobile'] , 'when' =>$send['time']  ]  );
+    if($in=true){
+          Session::flash('status', 'Data update was successful!');
+        } else {
+           Session::flash('status', 'Date update was unsuccessful!'); 
+        }
+    return view('reservation');
   
     }
     public function transaction(){

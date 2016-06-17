@@ -17,6 +17,7 @@
 <div class="row">
   <div class="container" >
   <div  class="col-md-5">
+  <p class="alert alert-{{ $msg }}">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
   {!!  Form::open(array('url' => 'booking','class'=>"form-horizontal"));!!}
   
   <fieldset class="form-group">
