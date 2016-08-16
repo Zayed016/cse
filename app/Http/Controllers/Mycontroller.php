@@ -23,7 +23,7 @@ use Redirect;
 class Mycontroller extends Controller
 {
    
-
+  
     public function formenu(){
     	//$all=DB::table('food')->select('id','type','name','price')->orderBy('id', 'asc')->get();
     	$lists=DB::select('select * from foodtypes');
@@ -37,12 +37,22 @@ class Mycontroller extends Controller
      //print_r($send);
     $in=DB::table('reserve')->insert( ['name' => $send['name'],'ref' => $rand ,'email' =>$send['email'] ,'size' =>$send['party'] , 'mobile' =>$send['mobile'] , 'when' =>$send['time']  ]  );
     if($in=true){
-          Session::flash('status', 'Data update was successful!');
+          Session::flash('alert-success', 'Data update was successful!');
         } else {
-           Session::flash('status', 'Date update was unsuccessful!'); 
+           Session::flash('alert-danger', 'Date update was unsuccessful!'); 
         }
     return view('reservation');
   
+    }
+
+    public function newedit($id){
+
+        
+        $food=DB::select('select * from foods where id = :id', ['id' => $id]);
+
+        $list=DB::select('select * from foodtypes');
+
+        return view('foodediting')->with(compact('food','list'));
     }
     public function transaction(){
     	
@@ -72,11 +82,19 @@ class Mycontroller extends Controller
     }
     
     public function order(){
-      $all=DB::table('trans')->where('t_id','!=','0' ,'and','d_time','>','NOW()')->orderby('d_time')->get();
-      //ll=DB::select('select * from trans where d_time >NOW() order by d_time');
+      //=DB::table('trans')->where('t_id','!=','0' ,'and','d_time','>','NOW()')->orderby('d_time')->get();
+      $all=DB::select('select * from trans where d_time >NOW() order by d_time');
 
       return view('showorder')->with(compact('all'));
     } 
+
+    public function report(){
+      //=DB::table('trans')->where('t_id','!=','0' ,'and','d_time','>','NOW()')->orderby('d_time')->get();
+      $all=DB::select('select * from trans where d_time <NOW() order by d_time');
+
+      return view('showreport')->with(compact('all'));
+    }
+    
     public function fooding(){
 
       $sql=DB::select('select * from foods');
@@ -88,8 +106,9 @@ class Mycontroller extends Controller
       $all=Input::all();
         print_r($all);
         $in=DB::table('foods')
-            ->where('id', 1)
+            ->where('id', $all['id'])
             ->update(['name' => $all['fname'],'type_id'=> $all['type'], 'price' => $all['fprice']]);
+
         if($in=true){
           Session::flash('status', 'Data update was successful!');
         } else {
@@ -102,8 +121,8 @@ class Mycontroller extends Controller
     }
     public function stuff(){
       $all=DB::table('stuff')->select('*')->orderBy('id', 'asc')->get();
-      echo "<pre>";
-      print_r($all);
+      
+      return view('listofstuff')->with(compact('all'));
     }
    
 

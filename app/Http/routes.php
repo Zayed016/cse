@@ -11,34 +11,37 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', ['as' => 'home', function () { 
+ return view('home');
+  }]);
+ 
+Route::get('home', ['as' => 'home', function () {
+  return view('home')
+  ;}]);
+ 
+Route::get('admin', ['as' => 'admin' , function(){
 
-Route::get('home', function () {
-    return view('home');
-});
+    if (Auth::check()) {
+    return Redirect::to('dashboard');
+    } 
+    else return view('ad');
+    }]);
 
 Route::group([ 'middleware' => 'admin'], function() {
+ 
+Route::get('dashboard',['as' => 'dashboard','uses' =>'Mycontroller@info'] );
 
-    Route::get('dashboard','Mycontroller@info');
+Route::get('order', ['as' => 'order','uses' =>'Mycontroller@order']);
 
-    Route::get('order','Mycontroller@order');
-    
-    Route::get('fooding','Mycontroller@fooding');
+Route::get('report', ['as' => 'report','uses' =>'Mycontroller@report']);
 
-    Route::get('editfood/{id}',function ($id) {
+Route::get('fooding', ['as' => 'fooding','uses' =>'Mycontroller@fooding']);
 
-        $food=DB::select('select * from foods where id = :id', ['id' => $id]);
+Route::get('editfood/{id}',['as' => 'editfood','uses' =>'Mycontroller@newedit']);
 
-        $list=DB::select('select * from foodtypes');
+Route::post('foodedit',['as' => 'editfood','uses' =>'Mycontroller@updatefood']);
 
-        return view('foodediting')->with(compact('food','list'));
-    });
-    
-    Route::post('foodedit','Mycontroller@updatefood');
-
-    Route::get('addfood',function(){
+Route::get('addfood',function(){
 
         $types=DB::select('select * from foodtypes');
 
@@ -94,46 +97,57 @@ Route::group([ 'middleware' => 'admin'], function() {
 
 
     Route::get('res',function(){
-        $get=DB::table('reserve')->orderby('when')->get();
+        $t = time();
+        $date = date("Y-m-d H:i:s", $t);
+       
+        
+        $get=DB::table('reserve')->where('when','>',$date)->orderby('when','desc')->take(5)->get();
         return view('showreserve')->with(compact('get'));
     });
 
-    Route::get('stuff','Mycontroller@stuff');
+    Route::get('stuff', ['as' => 'stuff','uses' =>'Mycontroller@stuff']);
 
     Route::get('received',function(){
-        $get=DB::table('contact')->where('status','=','0')->orderby('c_time')->get();
+        $get=DB::table('contact')->where('status','=','0')->orderby('c_time','desc')->get();
         return view('feedback')->with(compact('get'));
     });
-	
-});
+    Route::get('rece/{id}', function($id){
 
-    Route::get('logout',function(){
+       $get=DB::table('contact')->where('id','=',$id)->get();
+       return view ('feedbackdetails')->with(compact('get'));
+    });
+});
+    Route::post('ok',function(){
+        $all=Input::all();
+        
+        $in=DB::table('contact')->where(['id'=>$all['id']])->update(['status' => $all['status'] ]);
+        return Redirect::to('received');
+
+    });
+
+    Route::get('logout', ['as' => 'logout', function(){
 	Auth::logout();
 	return view('ad');
-});
+}]);
 
-    Route::get('admin',function(){
-	return view('ad');
-});
 
-Route::get('contact', function () {
+
+Route::get('contact', ['as' => 'contact', function () {
     return view('contact');
-});
+}]);
 
-Route::get('reservation', function () {
+Route::get('reservation',['as' => 'reservation', function () {
     return view('reservation');
-});
+}]);
 
-Route::post('booking', 'Mycontroller@reserve');
+Route::post('booking', ['as' => 'booking','uses' =>'Mycontroller@reserve']);
 
-Route::post('new', 'Mycontroller@login');
+Route::get('about', ['as' => 'about','uses' =>'Mycontroller@about']);
 
-Route::get('about','Mycontroller@about');
+Route::get('menu', ['as' => 'menu','uses' =>'Mycontroller@formenu'] );
 
-Route::get('menu', 'Mycontroller@formenu');
+Route::post('buying', ['as' => 'buying','uses' =>'Mycontroller@sale']);
 
-Route::post('buying', 'Mycontroller@sale');
+Route::post('send', ['as' => 'send','uses' =>'Mycontroller@message']);
 
-Route::post('send', 'Mycontroller@message');
-
-Route::post('final', 'Mycontroller@atlast');
+Route::post('final', ['as' => 'final','uses' =>'Mycontroller@atlast'] );

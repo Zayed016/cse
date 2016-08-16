@@ -17,7 +17,14 @@
 <div class="row">
   <div class="container" >
   <div  class="col-md-5">
-  <p class="alert alert-{{ $msg }}">{{ Session::get('status') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+
+     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+
+      <b><p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      @endif
+    @endforeach
+ 
   {!!  Form::open(array('url' => 'booking','class'=>"form-horizontal"));!!}
   
   <fieldset class="form-group">

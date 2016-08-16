@@ -9,6 +9,7 @@
 </br>
 </br>
 </br>
+<body style="background-color:#E6EFF2">
     <script>
 function showUser(str) {
     if (str == "") {
@@ -128,19 +129,24 @@ function showUser(str) {
 <div class="row">
   <div class="container" >
   <div class="col-md-6">
-{{ $errors->first('hidId') }}   <form>
-<select class="form-control input-md"  name="users" onchange="showUser(this.value)">
-  <option value="">Select A type of food</option>
+<b style="color:red;">{{ $errors->first('hidId') }} </b><br/> <br/>
+
+ <form>
+ <b><select class="form-control input-md"  name="users" onchange="showUser(this.value)">
+ <option value="">Select A type of food</option>
   @foreach ($lists as $list)
   <option value="{{$list->id}}">{{$list->name}}</option>
   @endforeach
-   </select>
+   </select></b>
 </form>
 <br>
 
 <div id="txtHint"><b>Food will be listed here...</b></div>
 </div>
+
 <div class="col-md-6">
+ <b><span style="color:green">Multiple of same food have option in next page</span></b>
+ <br/><br/>
 <table style='font-weight: bold; font-size: 16px; background-color: #EDF1F2;' class="table table-bordered" class="table table-condensed" id="orderedProductsTbl">
                 <thead>
                     <tr>
@@ -180,6 +186,7 @@ function showUser(str) {
             <input type="hidden" id="hidPrice" name="hidPrice" value="">
             <input type="submit" class="btn btn-success" onclick="passData()" style=" float:right" value="Buy" />
              {!!  Form::close(); !!}
+            
 </div>
 </div>
 </div>

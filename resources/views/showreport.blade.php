@@ -1,6 +1,7 @@
+
   @include('adminheader')
 <table class="table table-bordered">
-	<b><div class="well">List of order by customer (sorter by time)</div></b>
+	<b><div class="well">List of report of past order (sorter by time)</div></b>
 	<thead>
 		<tr>
 			<th>Reference id</th>

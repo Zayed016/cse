@@ -7,6 +7,8 @@
 <br/>
 <br/>
 <br/>
+<body style="background-color:#E6EFF2">
+	
 
 <div  style="float:right" class="container-fluid">
 <div class="row">
@@ -15,12 +17,13 @@
 
 	 {!!  Form::open(array('url' => 'new'));!!}
 	  {!! csrf_field() !!}
-	 {{$errors->first('need')}}
-	 {{ $errors->first('username') }}
+	<label><p style="color:red"> {{$errors->first('need')}}</p></label>
+	<label><p style="color:red"> {{ $errors->first('username')}}</p></label>
 	<fieldset class="form-group">
 	<label for="username"> Username </label>
 	<input type="text" class="form-control" name="username"  value="{{ old('username') }}">
-	</fieldset>{{ $errors->first('password') }}
+	</fieldset>
+	<label><p style="color:red"> {{ $errors->first('password') }}</p></label>
 	<fieldset class="form-group">
 	<label for="address"> Password </label>
 	<input type="password" class="form-control" name="password" value="">
@@ -32,3 +35,4 @@
 </div>
 </div>
 </div>
+</body>

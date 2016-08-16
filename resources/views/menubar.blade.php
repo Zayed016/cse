@@ -36,13 +36,13 @@
 
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul style= "font-size:28px;"class="nav navbar-nav">
+      <ul style= "font-size:28px;" class="nav navbar-nav">
         
-         <li><a href="home">Home</a></li>
-        <li><a href="menu">Menu</a></li>
-        <li><a href="reservation">Table book</a></li>
-      	<li><a href="about">About Us</a></li>
-      	<li><a href="contact">Contact Us</a></li>
+         <li><a href="{{ route('home') }}">Home</a></li>
+        <li><a href="{{ route('menu') }}">Menu</a></li>
+        <li><a href="{{ route('reservation') }}">Table book</a></li>
+      	<li><a href="{{ route('about') }}">About Us</a></li>
+      	<li><a href="{{ route('contact') }}">Contact Us</a></li>
       </ul>
       <div style="float: right"><form class="navbar-form navbar-left" role="search">
         <div class="form-group">

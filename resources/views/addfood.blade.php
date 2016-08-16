@@ -1,12 +1,21 @@
-
-{!!  Form::open(array('url' => 'foodadd'));!!}
+  @include('adminheader')
+ <div class="row">
+ <div class="container" >
+  <div class="col-lg-6">
+    <br/>
+{!!  Form::open(array('url' => 'foodadd','class'=>"form-horizontal"));!!}
 	  {!! csrf_field() !!}
-<select name="type">
+<div class="form-group">
+<select class="form-control input-lg" name="type">
 @foreach($types as $type)
 	<option value="{{$type->id}}"> {{$type->name}}</option>
 @endforeach
 </select><br/><br/>
- Name:<input type="text" name="name" value="" placeholder=""><br/><br/>
- Price:<input type="text" name="price" value="" placeholder=""><br/><br/>
-<input type="submit" name="" value="submit">
- {!!  Form::close(); !!}
+ Name:<input class="form-control input-lg" type="text" class="form-control" required name="name" value="" placeholder=""><br/><br/>
+ Price:<input class="form-control input-lg" type="text" class="form-control" required name="price" value="" placeholder=""><br/><br/>
+<button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  {!!  Form::close(); !!}
+</div>
+ </div>
+ </div>

@@ -13,9 +13,8 @@ foreach ($plus as $key ) {
 </br>
 </br>
 </br>
-<!DOCTYPE html>
 
-
+<body style="background-color:#E6EFF2">
 <script type="text/javascript" charset="utf-8" async defer>
 var Totalprice=0;
 var main=0;
@@ -145,18 +144,17 @@ How many? &nbsp&nbsp&nbsp&nbsp
         </ul>
     </div>
 @endif -->
-
-
+<br/><br/><br/><br/>
+<b style="font-size:18px;">Payment method description is in next page</b>
  </div>
 </div>
  </div>
  </div>
- </div>
-  <header>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+</div>
+</div>
+<ul>
+	<li></li>
+</ul>
 
-
-            <ul>
-                <li></li>
-              </ul>
-
-        </header>
+</body>

@@ -17,7 +17,6 @@ class CreateDeliveryTable extends Migration
             $table->text('f_list');
             $table->integer('ref_id')->unique();
             $table->integer('paid');
-            $table->string('status');
             $table->timestamp('time')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
