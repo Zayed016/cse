@@ -27,6 +27,8 @@ Route::get('admin', ['as' => 'admin' , function(){
     else return view('ad');
     }]);
 
+Route::post('new', ['as' => 'login','uses' =>'Mycontroller@login']);
+
 Route::group([ 'middleware' => 'admin'], function() {
  
 Route::get('dashboard',['as' => 'dashboard','uses' =>'Mycontroller@info'] );
@@ -41,96 +43,32 @@ Route::get('editfood/{id}',['as' => 'editfood','uses' =>'Mycontroller@newedit'])
 
 Route::post('foodedit',['as' => 'editfood','uses' =>'Mycontroller@updatefood']);
 
-Route::get('addfood',function(){
+Route::get('addfood',['as' => 'addfood','uses' =>'Mycontroller@addfood']);
 
-        $types=DB::select('select * from foodtypes');
+Route::post('foodadd',['as' => 'foodadd','uses' =>'Mycontroller@foodadd']);
 
-        return view('addfood')->with(compact('types'));
-    });
-    Route::post('foodadd',function(){
+Route::get('addtype',['as' => 'addtype','uses' =>'Mycontroller@addtype']);
 
-        $all=Input::all();
+Route::post('typeadd',['as' => 'typeadd','uses' =>'Mycontroller@typeadd']);
 
-     $in=DB::table('foods')->insert([
-    ['name' => $all['name'], 'type_id' => $all['type'] ,'price' => $all['price']]
-            ]);
+Route::get('deletefood/{id}',['as' => 'deletefood','uses' =>'Mycontroller@deletefood']);
 
-     if($in==true){
-            Session::flash('status', 'Data added successfully!');
-        } else {
-           Session::flash('status', 'Date addition unsuccessful!'); 
-        } 
-         return redirect()->intended('fooding');
-    });
+Route::get('res',['as' => 'res','uses' =>'Mycontroller@res']);
 
-    Route::get('addtype',function(){
+Route::get('stuff', ['as' => 'stuff','uses' =>'Mycontroller@stuff']);
 
-         $types=DB::select('select * from foodtypes');
+Route::get('received',['as' => 'received','uses' =>'Mycontroller@received']);
 
-         return view('type')->with(compact('types'));
-    });
-    Route::post('typeadd',function(){
+Route::get('rece/{id}', ['as' => 'rece','uses' =>'Mycontroller@rece']);
 
-        $all=Input::all();
-
-     $in=DB::table('foodtypes')->insert(['name' => $all['type'] ]);
-
-        if($in==true){
-            Session::flash('status', 'Data added successfully!');
-        } else {
-           Session::flash('status', 'Date addition unsuccessful!'); 
-        } 
-         return redirect()->intended('addtype');
-    });
-
-    Route::get('deletefood/{id}',function($id){
-
-        $del=DB::table('foods')->where('id', '=', $id)->delete();
-
-        if($del==true){
-            Session::flash('status', 'Data delete was successful!');
-        } else {
-           Session::flash('status', 'Date delete was unsuccessful!'); 
-        } 
-         return redirect()->intended('fooding');
-    });
-
-
-    Route::get('res',function(){
-        $t = time();
-        $date = date("Y-m-d H:i:s", $t);
-       
-        
-        $get=DB::table('reserve')->where('when','>',$date)->orderby('when','desc')->take(5)->get();
-        return view('showreserve')->with(compact('get'));
-    });
-
-    Route::get('stuff', ['as' => 'stuff','uses' =>'Mycontroller@stuff']);
-
-    Route::get('received',function(){
-        $get=DB::table('contact')->where('status','=','0')->orderby('c_time','desc')->get();
-        return view('feedback')->with(compact('get'));
-    });
-    Route::get('rece/{id}', function($id){
-
-       $get=DB::table('contact')->where('id','=',$id)->get();
-       return view ('feedbackdetails')->with(compact('get'));
-    });
 });
-    Route::post('ok',function(){
-        $all=Input::all();
-        
-        $in=DB::table('contact')->where(['id'=>$all['id']])->update(['status' => $all['status'] ]);
-        return Redirect::to('received');
 
-    });
+Route::post('ok',['as' => 'ok','uses' =>'Mycontroller@ok']);
 
-    Route::get('logout', ['as' => 'logout', function(){
+Route::get('logout', ['as' => 'logout', function(){
 	Auth::logout();
 	return view('ad');
 }]);
-
-
 
 Route::get('contact', ['as' => 'contact', function () {
     return view('contact');

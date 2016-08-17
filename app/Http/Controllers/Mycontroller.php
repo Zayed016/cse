@@ -22,8 +22,85 @@ use Redirect;
 
 class Mycontroller extends Controller
 {
-   
-  
+    public function typeadd(){
+
+        $all=Input::all();
+
+     $in=DB::table('foodtypes')->insert(['name' => $all['type'] ]);
+
+        if($in==true){
+            Session::flash('status', 'Data added successfully!');
+        } else {
+           Session::flash('status', 'Date addition unsuccessful!'); 
+        } 
+         return redirect()->intended('addtype');
+    }
+
+    public function received(){
+
+      $get=DB::table('contact')->where('status','=','0')->orderby('c_time','desc')->get();
+        return view('feedback')->with(compact('get'));
+    }
+
+    public function rece($id){
+       $get=DB::table('contact')->where('id','=',$id)->get();
+       return view ('feedbackdetails')->with(compact('get'));
+    }
+
+    public function ok(){
+       $all=Input::all();
+        
+        $in=DB::table('contact')->where(['id'=>$all['id']])->update(['status' => $all['status'] ]);
+        return Redirect::to('received');
+    }
+
+    public function deletefood($id){
+
+      $del=DB::table('foods')->where('id', '=', $id)->delete();
+
+        if($del==true){
+            Session::flash('status', 'Data delete was successful!');
+        } else {
+           Session::flash('status', 'Date delete was unsuccessful!'); 
+        } 
+         return redirect()->intended('fooding');
+    }
+    public function res(){
+       $t = time();
+        $date = date("Y-m-d H:i:s", $t);
+       
+        
+        $get=DB::table('reserve')->where('when','>',$date)->orderby('when','desc')->take(5)->get();
+        return view('showreserve')->with(compact('get'));
+    }
+    public function addtype(){
+      $types=DB::select('select * from foodtypes');
+
+         return view('type')->with(compact('types'));
+    }
+
+    public function addfood(){
+
+      $types=DB::select('select * from foodtypes');
+
+      return view('addfood')->with(compact('types'));
+    }
+
+    public function foodadd(){
+         $all=Input::all();
+
+     $in=DB::table('foods')->insert([
+    ['name' => $all['name'], 'type_id' => $all['type'] ,'price' => $all['price']]
+            ]);
+
+     if($in==true){
+            Session::flash('status', 'Data added successfully!');
+        } else {
+           Session::flash('status', 'Date addition unsuccessful!'); 
+        } 
+         return redirect()->intended('fooding');
+    }
+
     public function formenu(){
     	//$all=DB::table('food')->select('id','type','name','price')->orderBy('id', 'asc')->get();
     	$lists=DB::select('select * from foodtypes');
@@ -103,6 +180,7 @@ class Mycontroller extends Controller
       return view('fooding')->with(compact('sql','tql'));
     }
     public function updatefood(){
+      
       $all=Input::all();
         print_r($all);
         $in=DB::table('foods')
@@ -116,10 +194,9 @@ class Mycontroller extends Controller
         }
         return redirect()->intended('fooding');
     }
-    public function res(){
-      
-    }
+   
     public function stuff(){
+
       $all=DB::table('stuff')->select('*')->orderBy('id', 'asc')->get();
       
       return view('listofstuff')->with(compact('all'));
